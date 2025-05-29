@@ -5,10 +5,13 @@
   "scripts": {
     "start": "node index.js"
   },
+  "engines": {
+    "node": "18.x"
+  },
   "dependencies": {
+    "canvas": "^2.11.2",
     "color-thief": "^2.2.3",
     "express": "^4.18.2",
-    "node-fetch": "^2.6.7",
-    "canvas": "^2.11.2"
+    "node-fetch": "^2.6.7"
   }
 }

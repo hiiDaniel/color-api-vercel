@@ -5,5 +5,10 @@
     ],
     "routes": [
       { "src": "/dominant", "dest": "/index.js" }
-    ]
+    ],
+    "build": {
+      "env": {
+        "NODE_VERSION": "18"
+      }
+    }
   }
