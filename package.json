@@ -9,9 +9,8 @@
     "node": "18.x"
   },
   "dependencies": {
-    "canvas": "^2.11.2",
-    "color-thief": "^2.2.3",
     "express": "^4.18.2",
+    "color-thief-node": "^1.0.5",
     "node-fetch": "^2.6.7"
   }
 }

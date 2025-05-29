@@ -1,30 +1,37 @@
-const express = require("express");
-const fetch = require("node-fetch");
-const ColorThief = require("color-thief");
-const { createCanvas, loadImage } = require("canvas");
+const express = require('express');
+const { getColorFromURL } = require('color-thief-node');
 
 const app = express();
-const colorThief = new ColorThief();
 
-app.get("/dominant", async (req, res) => {
+app.get('/dominant', async (req, res) => {
   const imageUrl = req.query.url;
+
   if (!imageUrl) {
-    return res.status(400).json({ error: "Missing image URL" });
+    return res.status(400).json({ error: 'Missing URL parameter: url' });
   }
 
   try {
-    const image = await loadImage(imageUrl);
-    const canvas = createCanvas(image.width, image.height);
-    const ctx = canvas.getContext("2d");
-    ctx.drawImage(image, 0, 0);
-
-    const rgb = colorThief.getColor(canvas);
-    const hex = `#${rgb.map(v => v.toString(16).padStart(2, '0')).join("")}`;
+    const rgb = await getColorFromURL(imageUrl);
+    const hex = rgbToHex(rgb);
     res.json({ hex });
-  } catch (e) {
-    console.error(e);
-    res.status(500).json({ error: "Failed to extract color." });
+  } catch (error) {
+    console.error('Error extracting color:', error.message);
+    res.status(500).json({ error: 'Failed to extract color', detail: error.message });
   }
 });
 
+// RGB to HEX helper
+function rgbToHex([r, g, b]) {
+  return (
+    '#' +
+    [r, g, b]
+      .map(x => {
+        const hex = x.toString(16);
+        return hex.length === 1 ? '0' + hex : hex;
+      })
+      .join('')
+  );
+}
+
+// Required for Vercel
 module.exports = app;
