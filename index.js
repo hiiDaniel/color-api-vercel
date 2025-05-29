@@ -5,26 +5,26 @@ import fetch from 'node-fetch';
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.get('/dominant', async (req, res) => {
+app.get('/colors', async (req, res) => {
   const imageUrl = req.query.url;
   if (!imageUrl) {
     return res.status(400).json({ error: 'Missing URL' });
   }
 
   try {
-    // fetch the image into a buffer
     const response = await fetch(imageUrl);
     const buffer = await response.buffer();
 
-    // extract dominant color
-    const colors = await getColors(buffer, 'image/jpeg'); // adjust MIME if needed
-    const dominantHex = colors[0].hex();
+    const colors = await getColors(buffer, 'image/jpeg'); // or 'image/png'
+    const hexColors = colors.map(color => color.hex());
 
-    // return under the field your Worker expects
-    res.json({ album_color: dominantHex });
+    res.json({
+      album_color: hexColors[0],
+      album_colors: hexColors
+    });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Failed to extract color' });
+    res.status(500).json({ error: 'Failed to extract colors' });
   }
 });
 
