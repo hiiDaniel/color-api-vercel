@@ -9,8 +9,8 @@
     "node": "18.x"
   },
   "dependencies": {
+    "color-thief-node": "^1.0.4",
     "express": "^4.18.2",
-    "color-thief-node": "^1.0.5",
     "node-fetch": "^2.6.7"
-  }
+}
 }

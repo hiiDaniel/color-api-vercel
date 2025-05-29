@@ -20,18 +20,11 @@ app.get('/dominant', async (req, res) => {
   }
 });
 
-// RGB to HEX helper
-function rgbToHex([r, g, b]) {
+function rgbToHex(rgb) {
   return (
     '#' +
-    [r, g, b]
-      .map(x => {
-        const hex = x.toString(16);
-        return hex.length === 1 ? '0' + hex : hex;
-      })
-      .join('')
+    rgb.map(x => x.toString(16).padStart(2, '0')).join('')
   );
 }
 
-// Required for Vercel
 module.exports = app;
