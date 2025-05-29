@@ -7,7 +7,8 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "color-thief-node": "^1.0.4",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "get-image-colors": "^3.6.3",
+    "node-fetch": "^2.6.7"
   }
 }
