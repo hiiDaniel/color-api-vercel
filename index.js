@@ -1,5 +1,5 @@
-const express = require('express');
-const { getColorFromURL } = require('color-thief-node');
+import express from 'express';
+import { getColorFromURL } from 'color-thief-node';
 
 const app = express();
 
@@ -27,4 +27,5 @@ function rgbToHex(rgb) {
   );
 }
 
-module.exports = app;
+// Required for Vercel's serverless build
+export default app;

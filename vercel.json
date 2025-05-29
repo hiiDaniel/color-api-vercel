@@ -4,11 +4,6 @@
       { "src": "index.js", "use": "@vercel/node" }
     ],
     "routes": [
-      { "src": "/dominant", "dest": "/index.js" }
-    ],
-    "build": {
-      "env": {
-        "NODE_VERSION": "18"
-      }
-    }
+      { "src": "/dominant", "dest": "index.js" }
+    ]
   }
